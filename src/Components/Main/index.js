@@ -31,23 +31,23 @@ class Main extends Component {
                 >
                     <div className="logo" />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1" icon={<UserOutlined />}>
+                        <Menu.Item key="1" icon={<BarChartOutlined />}>
                             <Link to={`/dashboard`}>Dashboard</Link>
                         </Menu.Item>
-                        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                            nav 2
+                        <Menu.Item key="2" icon={<TeamOutlined />}>
+                            Quản lý Khách hàng
         </Menu.Item>
                         <Menu.Item key="3" icon={<UploadOutlined />}>
-                            nav 3
+                            Quản lý Sản phẩm
         </Menu.Item>
                         <Menu.Item key="4" icon={<BarChartOutlined />}>
-                            nav 4
+                            Quản lý Danh mục
         </Menu.Item>
                         <Menu.Item key="5" icon={<CloudOutlined />}>
-                            nav 5
+                            Quản lý Thanh toán
         </Menu.Item>
                         <Menu.Item key="6" icon={<AppstoreOutlined />}>
-                            nav 6
+                            Quản lý Thông báo
         </Menu.Item>
                         <Menu.Item key="7" icon={<TeamOutlined />}>
                             nav 7

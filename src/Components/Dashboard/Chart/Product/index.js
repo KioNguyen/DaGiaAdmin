@@ -3,9 +3,9 @@ import { Doughnut } from 'react-chartjs-2';
 
 const data = {
     labels: [
-        'Red',
-        'Green',
-        'Yellow'
+        'Sản phẩm mới',
+        'Sản phẩm đã bán',
+        'Sản phẩm đang đấu giá'
     ],
     datasets: [{
         data: [300, 50, 100],
@@ -17,20 +17,22 @@ const data = {
         hoverBackgroundColor: [
             '#FF6384',
             '#36A2EB',
-            '#FFCE56'
+            '#ffc024'
         ]
     }]
 };
 
-export default React.createClass({
-    displayName: 'DoughnutExample',
-
+export default class ProductChart extends React.Component {
     render() {
         return (
             <div>
-                <h2>Doughnut Example</h2>
-                <Doughnut data={data} />
+                <h2>Biểu đồ sản phẩm</h2>
+                <Doughnut
+                    data={data}
+                    width={100}
+                    height={40}
+                />
             </div>
         );
     }
-});
+};

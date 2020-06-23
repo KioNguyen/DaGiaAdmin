@@ -1,8 +1,4 @@
-import React, { Component } from 'react'
-import ProductChart from './Chart/Product'
-import CustomerChart from './Chart/Customer'
-import ProductTable from '../Table/Product'
-import CustomerTable from '../Table/Customer'
+import React from 'react'
 import { Table, Tag, Space } from 'antd';
 
 const columns = [
@@ -77,16 +73,15 @@ const data = [
         tags: ['cool', 'teacher'],
     },
 ];
-class Dashboard extends Component {
+
+class ProductTable extends React.Component {
     render() {
         return (
             <div>
-                <ProductChart />
-                <ProductTable columns={columns} data={data} />
-                <CustomerChart />
-                <CustomerTable />
+                < Table columns={columns} dataSource={data} />
             </div>
         )
+
     }
 }
-export default Dashboard
+export default ProductTable
