@@ -1,0 +1,28 @@
+.InputTimeStart {
+    width: 20% !important;
+}
+
+.InputPriceStart,
+.InputPriceStep {
+    width: 40% !important;
+}
+
+.rdw-editor-main {
+    border: 1px solid #d9d9d9;
+    height: 300px;
+    padding: 5px;
+}
+
+.CloseModalButton {
+    display: flex;
+}
+
+.SubmitButton {
+    position: absolute;
+    right: -121px;
+    top: 92px;
+}
+
+.ant-btn.ant-btn-loading {
+    position: absolute;
+}

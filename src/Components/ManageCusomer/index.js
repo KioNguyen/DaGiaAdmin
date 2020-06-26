@@ -1,20 +1,25 @@
 import React, { Component } from 'react'
-import ProductChart from './Chart/Product'
-import CustomerChart from './Chart/Customer'
-import ProductTable from '../Table/Product'
 import CustomerTable from '../Table/Customer'
-import { Table, Tag, Space } from 'antd';
+import { Tag, Space, Avatar } from 'antd';
 import { Controls, PlayState, Tween } from 'react-gsap';
-
+import { UserOutlined } from '@ant-design/icons'
+import global from '../../Common/global'
 const columns = [
     {
-        title: 'Tên sản phẩm',
+        title: 'Avatar',
+        dataIndex: 'avatar',
+        key: 'avatar',
+        render: url => <div><Avatar size="large" icon={<UserOutlined />} /></div>,
+    },
+
+    {
+        title: 'Tên khách hàng',
         dataIndex: 'name',
         key: 'name',
         render: text => <a>{text}</a>,
     },
     {
-        title: 'Hình ảnh',
+        title: 'Tuổi',
         dataIndex: 'age',
         key: 'age',
     },
@@ -78,16 +83,18 @@ const data = [
         tags: ['cool', 'teacher'],
     },
 ];
-class Dashboard extends Component {
+class ManageCustomer extends Component {
+
     render() {
+        // let data = global.mapProductToTable()
+        console.log(this.props.products)
         return (
-            <Tween from={{ x: '-500px' }} to={{ x: '0px' }} duration={1} ease="back.out(0.7)">
-                <ProductChart />
-                <ProductTable columns={columns} data={data} />
-                <CustomerChart />
-                <CustomerTable />
+            <Tween from={{ x: '-500px' }} to={{ x: '0px' }} duration={0.5} ease="back.out(1)">
+                <div>
+                    <CustomerTable columns={columns} data={data} />
+                </div>
             </Tween>
         )
     }
 }
-export default Dashboard
+export default ManageCustomer

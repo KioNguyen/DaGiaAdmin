@@ -1,24 +1,64 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from '../Dashboard'
+import ManageCustomer from '../ManageCusomer'
+import ManageProduct from '../ManageProduct'
 import {
-    AppstoreOutlined,
-    BarChartOutlined,
-    CloudOutlined,
     ShopOutlined,
     TeamOutlined,
-    UserOutlined,
-    UploadOutlined,
-    VideoCameraOutlined,
+    SoundOutlined,
+    DollarCircleOutlined,
+    PartitionOutlined,
+    InboxOutlined,
+    PieChartOutlined
 } from '@ant-design/icons';
 import './style.scss'
-
+const { Title } = Typography
 const { Header, Content, Footer, Sider } = Layout;
 
 class Main extends Component {
+    headerTitle = [
+        {
+            key: 1,
+            name: 'DASHBOARD',
+            path: '/'
+        },
+        {
+            key: 1,
+            name: 'DASHBOARD',
+            path: '/dashboard'
+        },
+        {
+            key: 2,
+            name: 'QUẢN LÝ KHÁCH HÀNG',
+            path: '/manage/customer'
+        },
+        {
+            key: 3,
+            name: 'QUẢN LÝ SẢN PHẨM',
+            path: '/manage/product'
+        },
+        {
+            key: 4,
+            name: 'QUẢN LÝ DANH MỤC',
+            path: '/manage/category'
+        },
+        {
+            key: 5,
+            name: 'QUẢN LÝ THANH TOÁN',
+            path: '/manage/payment'
+        },
+        {
+            key: 6,
+            name: 'QUẢN LÝ THÔNG BÁO',
+            path: '/dashboard'
+        },
+
+    ]
     render() {
+        let title = this.headerTitle.find(ele => ele.path === window.location.pathname)
         return (
             <Layout>
                 <Sider
@@ -29,52 +69,54 @@ class Main extends Component {
                         left: 0,
                     }}
                 >
-                    <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1" icon={<BarChartOutlined />}>
+                    <div className="logo" >
+                        <Link to="/">
+                            <img src={process.env.PUBLIC_URL + '/logo192px.png'} alt="Logo" className="LogoNav" />
+                            <img src={process.env.PUBLIC_URL + '/Logo.png'} alt="Logo" className="SloganNav" />
+                        </Link>
+                    </div>
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={title.key.toString()}>
+                        <Menu.Item key="1" icon={<PieChartOutlined />}>
                             <Link to={`/dashboard`}>Dashboard</Link>
                         </Menu.Item>
                         <Menu.Item key="2" icon={<TeamOutlined />}>
-                            Quản lý Khách hàng
-        </Menu.Item>
-                        <Menu.Item key="3" icon={<UploadOutlined />}>
-                            Quản lý Sản phẩm
-        </Menu.Item>
-                        <Menu.Item key="4" icon={<BarChartOutlined />}>
+                            <Link to={`/manage/customer`}>Quản lý Khách hàng</Link>
+                        </Menu.Item>
+                        <Menu.Item key="3" icon={<InboxOutlined />}>
+                            <Link to={`/manage/product`}>Quản lý Sản phẩm</Link>
+                        </Menu.Item>
+                        <Menu.Item key="4" icon={<PartitionOutlined />}>
                             Quản lý Danh mục
-        </Menu.Item>
-                        <Menu.Item key="5" icon={<CloudOutlined />}>
+                        </Menu.Item>
+                        <Menu.Item key="5" icon={<DollarCircleOutlined />}>
                             Quản lý Thanh toán
-        </Menu.Item>
-                        <Menu.Item key="6" icon={<AppstoreOutlined />}>
+                        </Menu.Item>
+                        <Menu.Item key="6" icon={<SoundOutlined />}>
                             Quản lý Thông báo
-        </Menu.Item>
+                        </Menu.Item>
                         <Menu.Item key="7" icon={<TeamOutlined />}>
                             nav 7
-        </Menu.Item>
+                        </Menu.Item>
                         <Menu.Item key="8" icon={<ShopOutlined />}>
                             nav 8
-        </Menu.Item>
+                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout className="site-layout" style={{ marginLeft: 200 }}>
-                    <Header className="site-layout-background" style={{ padding: 0 }} />
-                    <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                    <Header className="site-layout-background Header" style={{ padding: 0 }}>
+                        <Title level={4}>{title.name}</Title>
+                    </Header>
+                    <Content className='Container' style={{ margin: '80px 16px 0', overflow: 'initial' }}>
                         <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
-                            <Router>
-                                <div className="Content">
-                                    {/* <Header /> */}
-                                    <Switch>
-                                        <Route path="/" component={Dashboard} />
-                                        <Route path="/dashboard" component={Dashboard} />
-                                    </Switch>
-                                    {/* <Footer className='Footer' style={{ textAlign: 'center' }}>DAGIA - SYSTEM ©2020 Created by Hung - Hao</Footer> */}
-                                </div>
-                            </Router>
-
+                            <div className="Content">
+                                <Route exact path="/" component={Dashboard} />
+                                <Route exact path="/dashboard" component={Dashboard} />
+                                <Route exact path="/manage/customer" component={ManageCustomer} />
+                                <Route exact path="/manage/product" component={ManageProduct} />
+                            </div>
                         </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                    <Footer className='Footer' style={{ textAlign: 'center' }}>DAGIA - SYSTEM ©2020 Created by Hung - Hao</Footer>
                 </Layout>
             </Layout>
         )
