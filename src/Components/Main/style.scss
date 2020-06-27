@@ -1,37 +1,54 @@
-.logo {
-    height: 60px;
-    /* background: rgb(117, 135, 152); */
-    margin: 16px 0;
-    .LogoNav,
-    .SloganNav {
-        width: 30%;
+    .logo {
+        height: 60px;
+        /* background: rgb(117, 135, 152); */
+        margin: 16px 0;
+        .LogoNav,
+        .SloganNav {
+            width: 30%;
+        }
+        .SloganNav {
+            margin-left: 12px;
+        }
     }
-    .SloganNav {
-        margin-left: 12px;
+    
+    .site-layout .site-layout-background {
+        background: #fff;
     }
-}
-
-.site-layout .site-layout-background {
-    background: #fff;
-}
-
-h4.ant-typography,
-.ant-typography h4 {
-    /* margin-bottom: 0.5em; */
-    color: rgba(0, 0, 0, 0.85);
-    font-weight: 600;
-    font-size: 20px;
-    /* line-height: 1.4; */
-    display: flex;
-    left: 31px;
-    margin-left: 20px;
-}
-
-.Header {
-    padding: 0px;
-    position: fixed;
-    z-index: 2;
-    width: 100%;
-}
-
-.Container {}
+    
+    .ant-layout .site-layout {
+        height: -webkit-fill-available;
+    }
+    
+    h4.ant-typography,
+    .ant-typography h4 {
+        /* margin-bottom: 0.5em; */
+        color: rgba(0, 0, 0, 0.85);
+        font-weight: 600;
+        font-size: 20px;
+        /* line-height: 1.4; */
+        display: flex;
+        left: 31px;
+        margin-left: 20px;
+    }
+    
+    .Header {
+        padding: 0px;
+        position: fixed;
+        z-index: 2;
+        width: 100%;
+    }
+    
+    .Container {
+        min-height: fit-content;
+    }
+    
+    .Content {
+        text-align: -webkit-center;
+    }
+    
+    .LogoutButton {
+        margin: 20px;
+        font-size: 15px;
+        width: 35px;
+        height: 35px;
+    }

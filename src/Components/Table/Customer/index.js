@@ -81,7 +81,7 @@ class CustomerTable extends React.Component {
     render() {
         return (
             <div>
-                < Table columns={this.props.columns} dataSource={this.props.data} />
+                < Table loading={this.props.loading} columns={this.props.columns} dataSource={this.props.data} />
             </div>
         )
 

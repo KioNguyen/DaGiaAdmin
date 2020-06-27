@@ -1,5 +1,6 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import './style.scss'
 
 const data = {
     labels: [
@@ -25,7 +26,7 @@ const data = {
 export default class ProductChart extends React.Component {
     render() {
         return (
-            <div>
+            <div className='ProductChart'>
                 <h2>Biểu đồ sản phẩm</h2>
                 <Doughnut
                     data={data}

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-import { Layout, Menu, Typography } from 'antd';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { Layout, Menu, Typography, Button, Tooltip } from 'antd';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from '../Dashboard'
 import ManageCustomer from '../ManageCusomer'
 import ManageProduct from '../ManageProduct'
+import * as AuthAction from '../../store/actions/authActions'
 import {
     ShopOutlined,
     TeamOutlined,
@@ -12,13 +14,19 @@ import {
     DollarCircleOutlined,
     PartitionOutlined,
     InboxOutlined,
-    PieChartOutlined
+    PieChartOutlined,
+    DeleteOutlined,
+    PoweroffOutlined
 } from '@ant-design/icons';
 import './style.scss'
 const { Title } = Typography
 const { Header, Content, Footer, Sider } = Layout;
 
 class Main extends Component {
+    state = {
+        collapsed: false,
+        isAuth: true
+    }
     headerTitle = [
         {
             key: 1,
@@ -57,25 +65,41 @@ class Main extends Component {
         },
 
     ]
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                collapsed: true
+            })
+        }, 2000);
+    }
+    handleLogout() {
+        this.setState({ isAuth: false })
+        this.props.logout()
+    }
+    onCollapse = collapsed => {
+        console.log(collapsed);
+        this.setState({ collapsed });
+    };
     render() {
+        if (this.state.isAuth === false) {
+            return <Redirect to='/login' />
+        }
         let title = this.headerTitle.find(ele => ele.path === window.location.pathname)
+        console.log(title)
         return (
             <Layout>
                 <Sider
-                    style={{
-                        overflow: 'auto',
-                        height: '100vh',
-                        position: 'fixed',
-                        left: 0,
-                    }}
+                    collapsible
+                    collapsed={this.state.collapsed}
+                    onCollapse={this.onCollapse}
                 >
                     <div className="logo" >
-                        <Link to="/">
+                        <Link to='/'>
                             <img src={process.env.PUBLIC_URL + '/logo192px.png'} alt="Logo" className="LogoNav" />
-                            <img src={process.env.PUBLIC_URL + '/Logo.png'} alt="Logo" className="SloganNav" />
+                            <img src={process.env.PUBLIC_URL + '/Logo.png'} alt="Logo" className="SloganNav" hidden={this.state.collapsed} />
                         </Link>
                     </div>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={title.key.toString()}>
+                    <Menu theme="dark" mode="inline" selectedKeys={title.key.toString()}>
                         <Menu.Item key="1" icon={<PieChartOutlined />}>
                             <Link to={`/dashboard`}>Dashboard</Link>
                         </Menu.Item>
@@ -94,15 +118,15 @@ class Main extends Component {
                         <Menu.Item key="6" icon={<SoundOutlined />}>
                             Quản lý Thông báo
                         </Menu.Item>
-                        <Menu.Item key="7" icon={<TeamOutlined />}>
-                            nav 7
-                        </Menu.Item>
-                        <Menu.Item key="8" icon={<ShopOutlined />}>
-                            nav 8
-                        </Menu.Item>
                     </Menu>
+                    <Tooltip placement="right" title='Đăng xuất!'>
+                        <Button type="primary" shape="circle" danger className='LogoutButton' onClick={() => this.handleLogout()}>
+                            <PoweroffOutlined />
+                        </Button>
+                    </Tooltip>
+
                 </Sider>
-                <Layout className="site-layout" style={{ marginLeft: 200 }}>
+                <Layout className="site-layout">
                     <Header className="site-layout-background Header" style={{ padding: 0 }}>
                         <Title level={4}>{title.name}</Title>
                     </Header>
@@ -122,4 +146,17 @@ class Main extends Component {
         )
     }
 }
-export default Main
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getToken: () => dispatch(AuthAction.getToken()),
+        logout: () => dispatch(AuthAction.logout())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main); 

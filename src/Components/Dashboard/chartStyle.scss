@@ -55,3 +55,18 @@ label {
     font-style: italic;
     color: #999;
 }
+
+.ProductTable {
+    img {
+        width: 50px;
+    }
+    .Feature {
+        height: 56px;
+    }
+}
+
+.ProductAction {
+    Button {
+        margin-left: 5px;
+    }
+}

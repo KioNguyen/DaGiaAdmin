@@ -6,7 +6,7 @@ import { FileAddOutlined, SearchOutlined, DeleteOutlined, EditOutlined } from '@
 import { Controls, PlayState, Tween } from 'react-gsap';
 import * as productActions from '../../store/actions/productActions'
 import { connect } from 'react-redux'
-import global from '../../Common/global'
+import * as global from '../../Common/global'
 import AddForm from './AddForm'
 import EditForm from './EditForm'
 import './style.scss'
@@ -86,11 +86,19 @@ class ManageProduct extends Component {
     getProducts = (categoryId = '', filter = null) => {
         this.props.getProducts(categoryId, filter)
             .then(response => {
-                console.log(response)
-                this.setState({
-                    tableLoading: false,
-                    products: response.data.data
-                })
+                try {
+                    console.log(response)
+                    this.setState({
+                        tableLoading: false,
+                        products: response.data.data
+                    })
+                } catch (error) {
+                    this.setState({
+                        tableLoading: false,
+                        products: null
+                    })
+                    console.log(error)
+                }
             });
     }
     deleteProduct(id) {
@@ -159,7 +167,8 @@ class ManageProduct extends Component {
             {
                 dataIndex: 'image',
                 key: 'image',
-                render: url => <img src={url} />
+                render: url => <img src={url} />,
+                align: 'center'
             },
             {
                 title: 'Tên sản phẩm',
