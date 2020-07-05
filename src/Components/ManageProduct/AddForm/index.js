@@ -194,7 +194,8 @@ class AddForm extends React.Component {
                 startPrice: priceStart,
                 currentPrice: priceStart,
                 priceStep: priceStep,
-                timeDuration: timeStart
+                timeDuration: timeStart,
+                timeStart: Date.now()
             }
         }
         this.props.createProduct(dataPost).then((res) => {
@@ -362,37 +363,30 @@ class AddForm extends React.Component {
                             className='InputTimeStart'
                             min={0}
                             defaultValue={0}
-                            formatter={value => `${value} Ngày`}
-                            parser={value => value.replace(' Ngày', '')}
+                            // formatter={value => `${value} Ngày`}
+                            // parser={value => value.replace(' Ngày', '')}
+                            // formatter={value => `${value} Ngày`}
+                            // parser={value => value.replace(/\ Ngày\s?|(,*)/g, '')}
                             onChange={value => this.handleTimeStart(value, 'DAY')}
-                        />
-                        <InputNumber
+                        />  Ngày  <InputNumber
                             className='InputTimeStart'
                             defaultValue={0}
                             min={0}
                             max={23}
-                            formatter={value => `${value} Giờ`}
-                            parser={value => value.replace(' Giờ', '')}
                             onChange={value => this.handleTimeStart(value, 'HOUR')}
-                        />
-                        <InputNumber
+                        />  Giờ  <InputNumber
                             className='InputTimeStart'
                             defaultValue={0}
                             min={0}
                             max={59}
-                            formatter={value => `${value} Phút`}
-                            parser={value => value.replace(' Phút', '')}
                             onChange={value => this.handleTimeStart(value, 'MINU')}
-                        />
-                        <InputNumber
+                        />  Phút  <InputNumber
                             className='InputTimeStart'
                             defaultValue={0}
                             min={0}
                             max={59}
-                            formatter={value => `${value} Giây`}
-                            parser={value => value.replace(' Giây', '')}
                             onChange={value => this.handleTimeStart(value, 'SECO')}
-                        />
+                        />  Giây
                     </Form.Item>
                     <Form.Item label="Đấu giá ngay">
                         <Switch defaultChecked={this.state.bidNow} onChange={checked => this.onChangeBidNow(checked)} />
